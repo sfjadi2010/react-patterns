@@ -1,4 +1,3 @@
-import axios from "axios";
 import "./App.css";
 import Container from "./components/Container";
 import UserInfo from "./components/UserInfo";
