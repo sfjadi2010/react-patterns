@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import axios from "axios";
+import Container from "./components/Container";
+import UserInfo from "./components/UserInfo";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const getData = async (url) => {
+    const response = await axios.get(url);
+    if (!response.statusText === "OK") {
+      throw new Error("Network response was not ok");
+    }
+    console.log("Fetched user data:", response.data);
+    return response.data;
+  };
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Container Pattern Generic</h1>
+      <p>This is a generic container pattern example.</p>
+      <br />
+      <Container resourceName={"user"} getData={() => getData("/users/1")}>
+        <UserInfo />
+      </Container>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
