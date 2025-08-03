@@ -1,9 +1,9 @@
 import "./App.css";
 import axios from "axios";
-import Container from "./components/Container";
+import DataSource from "./components/DataSource";
 import UserInfo from "./components/UserInfo";
 
-const App = () => {
+function App() {
   const getData = async (url) => {
     const response = await axios.get(url);
     if (!response.statusText === "OK") {
@@ -17,9 +17,10 @@ const App = () => {
       <h1>Container Pattern Generic</h1>
       <p>This is a generic container pattern example.</p>
       <br />
-      <Container resourceName={"user"} getData={() => getData("/users/1")}>
-        <UserInfo />
-      </Container>
+      <DataSource
+        getData={() => getData("/users/2")}
+        render={(resource) => <UserInfo user={resource} />}
+      />
     </>
   );
 }
