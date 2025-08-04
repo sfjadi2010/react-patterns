@@ -1,19 +1,26 @@
+import React, { useState } from "react";
 import "./App.css";
+import ControlledModal from "./components/ControlledModal";
 import ControlledForm from "./components/ControlledForm";
-import UnControlledForm from "./components/UnControlledForm";
 
-function App() {
+const App = () => {
+  const [shouldDisplay, setShouldDisplay] = useState(false);
+
   return (
     <>
-      <div>        
-        <UnControlledForm />
-      </div>
-
-      <div>
+      <ControlledModal
+        shouldDisplay={shouldDisplay}
+        onClose={() => setShouldDisplay(false)}
+      >
         <ControlledForm />
+      </ControlledModal>
+      <div>
+        <button onClick={() => setShouldDisplay(!shouldDisplay)} style={{ zIndex: 1000 }}>
+          {shouldDisplay ? "Hide Modal" : "Show Modal"}
+        </button>
       </div>
     </>
   );
-}
+};
 
 export default App;
