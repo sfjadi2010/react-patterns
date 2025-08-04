@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 const ControlledForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [name, setName] = useState("");
   const [age, setAge] = useState();
   const [nameErrorMessage, setNameErrorMessage] = useState("");
   const [ageErrorMessage, setAgeErrorMessage] = useState("");
 
-  useEffect(() => {
+  useEffect(() => {   
+    if (!isSubmitted) return; // Only validate after submission 
     if (name.trim() === "") {
       setNameErrorMessage("Name is required");
     } else {
@@ -18,13 +20,18 @@ const ControlledForm = () => {
     } else {
       setAgeErrorMessage("");
     }
-  }, [name, age]);
+  }, [name, age, isSubmitted]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  }
 
   return (
     <>
       <div className="container">
         <h3>Controlled Component Example</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-control">
             <input
               type="text"
