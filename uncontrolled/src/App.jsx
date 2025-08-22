@@ -2,27 +2,23 @@ import React, { useState } from "react";
 import "./App.css";
 import ControlledModal from "./components/ControlledModal";
 import ControlledForm from "./components/ControlledForm";
+import UncontrolledFlow from "./components/UncontrolledFlow";
+import Identification from "./components/Identification";
+import Demographics from "./components/Demographics";
+import ContactInformation from "./components/ContactInformation";
+import MedicalHistory from "./components/MedicalHistory";
 
 const App = () => {
-  const [shouldDisplay, setShouldDisplay] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setShouldDisplay(!shouldDisplay);}
 
   return (
     <>
-      <ControlledModal
-        shouldDisplay={shouldDisplay}
-        onClose={() => setShouldDisplay(false)}
-      >
-        <ControlledForm />
-      </ControlledModal>
-      <div>
-        <button onClick={handleClick} style={{ zIndex: 1000 }}>
-          {shouldDisplay ? "Hide Modal" : "Show Modal"}
-        </button>
-      </div>
+      <h2>Patient Information</h2>
+      <UncontrolledFlow>
+        <Identification />
+        <Demographics />
+        <ContactInformation />
+        <MedicalHistory />
+      </UncontrolledFlow>
     </>
   );
 };
